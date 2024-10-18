@@ -18,33 +18,19 @@ describe('throwError', () => {
   test('should throw error with provided message', () => {
     const msg = 'Class aptent taciti';
 
-    try {
-      throwError(msg);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect((error as Error).message).toBe(msg);
-    }
+    expect(() => throwError(msg)).toThrow(msg);
   });
 
   test('should throw error with default message if message is not provided', () => {
     const defaultMsg = 'Oops!';
 
-    try {
-      throwError();
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect((error as Error).message).toBe(defaultMsg);
-    }
+    expect(() => throwError()).toThrow(defaultMsg);
   });
 });
 
 describe('throwCustomError', () => {
   test('should throw custom error', () => {
-    try {
-      throwCustomError();
-    } catch (error) {
-      expect(error).toBeInstanceOf(MyAwesomeError);
-    }
+    expect(throwCustomError).toThrow(MyAwesomeError);
   });
 });
 

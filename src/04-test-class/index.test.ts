@@ -24,11 +24,9 @@ describe('BankAccount', () => {
     const account = getBankAccount(2000);
     const withdrawAmount = 5000;
 
-    try {
-      account.withdraw(withdrawAmount);
-    } catch (error) {
-      expect(error).toBeInstanceOf(InsufficientFundsError);
-    }
+    expect(() => account.withdraw(withdrawAmount)).toThrow(
+      InsufficientFundsError,
+    );
   });
 
   test('should throw error when transferring more than balance', () => {
@@ -36,22 +34,18 @@ describe('BankAccount', () => {
     const toAccount = getBankAccount(2000);
     const transferAmount = 5000;
 
-    try {
-      account.transfer(transferAmount, toAccount);
-    } catch (error) {
-      expect(error).toBeInstanceOf(InsufficientFundsError);
-    }
+    expect(() => account.transfer(transferAmount, toAccount)).toThrow(
+      InsufficientFundsError,
+    );
   });
 
   test('should throw error when transferring to the same account', () => {
     const account = getBankAccount(2000);
     const transferAmount = 5000;
 
-    try {
-      account.transfer(transferAmount, account);
-    } catch (error) {
-      expect(error).toBeInstanceOf(TransferFailedError);
-    }
+    expect(() => account.transfer(transferAmount, account)).toThrow(
+      TransferFailedError,
+    );
   });
 
   test('should deposit money', () => {
